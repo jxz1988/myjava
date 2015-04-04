@@ -12,7 +12,7 @@ import java.io.OutputStream;
 
 
 public class GeneCharacters {
-	public static String PATH="/Users/jinenzai/Documents/data.txt";
+	public static String PATH="/Users/jinenzai/Documents/data1s.txt";
 	public static void main(String[] args) throws IOException{
 		try (OutputStream out = new FileOutputStream(PATH)){
 			FileWriter writer = new FileWriter(PATH);
