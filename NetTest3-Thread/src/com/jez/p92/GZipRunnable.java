@@ -1,0 +1,43 @@
+package com.jez.p92;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.zip.GZIPOutputStream;
+
+public class GZipRunnable implements Runnable {
+	private final File input;
+
+	public GZipRunnable(File input) {
+		// TODO Auto-generated constructor stub
+		this.input = input;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		if (!input.getName().endsWith(".gz")) {
+			File output = new File(input.getParent(), input.getName() + ".gz");
+			if (!output.exists()) {
+				try(InputStream in = new BufferedInputStream(
+						new FileInputStream(input));
+				OutputStream out = new BufferedOutputStream(
+						new GZIPOutputStream(new FileOutputStream(output)));){
+					int b;
+					while(in.read()!=-1){
+						b=in.read();
+						out.write(b);
+					}
+						
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.out.println(e);
+				}
+			}
+		}
+	}
+}
